@@ -40,8 +40,11 @@ While all the above tools are great for finding and setting `readahead` for stor
 In 2005, Canadian Mark Lord developed the small `hdparm` utility to test Linux drivers for IDE hard drives. Since then, the program has developed into a valuable tool for diagnosis and tuning of hard drives. For example, it tests the speed of hard drives and solid state disks, puts devices to sleep, and turns the energy-saving mode on or off. With modern devices, it can activate the acoustic mode and clean up SSDs.
 
 **Installation**:
-
+To install `hdparm` on Debian use `apt` and on Red Hat use `yum`:
 `sudo {apt|yum} install hdparm`
+
+### What is the `readahead`?
+`sudo hdparm -a /dev/sda`
 
 ### How fast is the disk?
 `sudo hdparm -t /dev/sda`
@@ -51,7 +54,9 @@ dev/sda:
  Timing buffered disk reads: 1496 MB in  3.00 seconds = 498.47 MB/sec
 ```
 
-### Linux commands to **set** `readahead` for device:
+You can test the speed to see what the results are before and after making the `hdparm` change.
+
+### Linux commands to **SET** `readahead` for device:
 
 (The following assumes `/dev/nvme0n1` as the block device.)
 
@@ -100,7 +105,8 @@ Debian Linux and derivatives read the /etc/hdparm.conf configuration file on sys
 
 ## Red Hat and derivatives including CentOS and Amazon Linux
 
-To make `readahead` changes persistent across reboots (ensure <device> set to the appropriate volume).
+To make `readahead` changes persistent across reboots:
+ (ensure <device> set to the appropriate volume)
 
 ```bash
 $ echo 'ACTION=="add|change", KERNEL=="<device>", ATTR{bdi/read_ahead_kb}="16"' | sudo tee -a /etc/udev/rules.d/85-mongodb.rules
@@ -110,3 +116,7 @@ The value of ATTR bdi/read_ahead_kb is in kb. One sector = 512 bytes; eg 256 kb 
 Note: You will need to restart your mongod process/s after this change for the new readahead settings to take effect.  You will need to set it for the physical devices, the logical devices, and the mount.
 
 For more information on SDD disk tuning for Red Hat systems, please see the [Red_Hat_Enterprise_Linux-Performance_Tuning_Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Considerations-Solid_State_Disks)
+
+## Conclusion
+
+Readahead isn't so scary after all!  We want to help customer improve the speed of their applications and databases.  This is one way to help them :)
