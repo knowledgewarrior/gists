@@ -1,4 +1,5 @@
-## Jason Fowler
+## Block Device Settings, aka "Readahead" for MongoDB
+#### Jason Fowler, Technical Services Engineer
 
 Readahead is a setting on a block device (usually a storage device like a harddrive or NAS) that controls how much data is fetched whenever a read from that block device happens. Disk seeks on spinning disks are very expensive, but accessing sequential blocks of data is relatively cheap. Since many applications tend to access data sequentially, it makes sense that if you're going to pay the cost to do a disk seek to read in data, you should try to read some extra data after.
 
@@ -7,7 +8,6 @@ We have observed that using 256 blocks readahead the snapshot creation speed imp
 If readahead is set too high MongoDB won't be able to use all the RAM available on the machine effectively. This is because each disk read will be pulling a lot of extra data which will take up room in memory, but will never be accessed before being paged out to make room for data read in by another read operation.  Please see below for more information on setting `readahead` for MongoDB.
 
 
-## Block Device Settings, aka "Readahead" for MongoDB
 
 (The following assumes `/dev/sda` as the block device.
 To list all devices, type `sudo blockdev --report`)
