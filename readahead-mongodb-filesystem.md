@@ -44,7 +44,7 @@ In 2005, Canadian Mark Lord developed the small `hdparm` utility to test Linux d
 `sudo {apt|yum} install hdparm`
 
 ### How fast is the disk?
-`/sudo hdparm -t /dev/sda`
+`sudo hdparm -t /dev/sda`
 
 ```
 dev/sda:
