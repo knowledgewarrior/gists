@@ -4,9 +4,7 @@
 
  * [Overview](#overview)
  * [ReadAhead for MongoDB](#ReadAhead)
- * [Quick Start](#quick-start)
- * [Setup](#setup)
- * [SSL](#ssl)
+
 
 ## Overview
 
