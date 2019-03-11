@@ -121,12 +121,13 @@ For more information on SDD disk tuning for Red Hat systems, please see the [Red
 
 We ran tests to find out how changing `readahead` on the Linux block device for a BackupDaemon, a `node` used to run and perform backups and database snapshots, affects running backups for a 4TB Head DB.  
 
-ReadAhead                                 Snapshot Completion (hrs)
-256kb / 512 blocks                            7.7
 
-1024kb / 2048 blocks                          5.6
-
-4096kb / 8192 blocks                          4.4
+| ReadAhead   | Snapshot Completion (hrs) |
+|----------|:-------------:|
+| 256kb / 512 blocks | 7.7 |
+| 1024kb / 2048 blocks | 5.6 |
+| 4096kb / 8192 blocks | 4.4 |
+                                                          
 
 ## Conclusion
 
