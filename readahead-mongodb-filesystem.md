@@ -116,3 +116,18 @@ The value of ATTR bdi/read_ahead_kb is in kb. One sector = 512 bytes; eg 256 kb 
 Note: You will need to restart your mongod process/s after this change for the new readahead settings to take effect.  You will need to set it for the physical devices, the logical devices, and the mount.
 
 For more information on SDD disk tuning for Red Hat systems, please see the [Red_Hat_Enterprise_Linux-Performance_Tuning_Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/performance_tuning_guide/#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Considerations-Solid_State_Disks)
+
+## Proof is in the Pudding
+
+We ran tests to find out how changing `readahead` on the Linux block device for a BackupDaemon, a `node` used to run and perform backups and database snapshots, affects running backups for a 4TB Head DB.  
+
+ReadAhead                                 Snapshot Completion (hrs)
+256kb / 512 blocks                            7.7
+
+1024kb / 2048 blocks                          5.6
+
+4096kb / 8192 blocks                          4.4
+
+## Conclusion
+
+As you can see in the above table, snapshot creation time is reduced by almost half changing `readahead` from 512 blocks to 8192 blocks.
