@@ -1,6 +1,6 @@
 # ELK Testing
 
-## Create new VM as per CHC Policies, etc.
+## Create new VM.
 
 ## Create 2 Storage disks, then add to VM:
 
